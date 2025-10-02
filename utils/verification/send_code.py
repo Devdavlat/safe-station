@@ -9,6 +9,8 @@ from utils.get_object import get_or_none
 
 
 def send_verification_code(phone_number, verification_type):
+    print("phone_number", phone_number)
+    print("verification_type", verification_type)
     url = "https://notify.eskiz.uz/api/message/sms/send"
     from utils.verification import get_sms_service_token
     code = get_random_string(length=6, allowed_chars="1234567890")
@@ -33,13 +35,12 @@ def send_verification_code(phone_number, verification_type):
         "from": msg_from,
     }
     headers = {"Authorization": f"Bearer {get_sms_service_token()}"}
-    print(payload, '\n headers:', headers)
+    print(headers)
     try:
         response = requests.post(url=url, headers=headers, data=payload)
     except Exception as err:
         logging.error(err)
     else:
-        print("response:", response.json())
         return response
 
 
