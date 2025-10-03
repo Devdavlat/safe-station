@@ -13,6 +13,7 @@ class SendVerificationCodeView(APIView):
     def post(self, request):
         serializer = SendVerificationCodeSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
+            print(serializer.initial_data)
             phone_number = serializer.validated_data.get("phone_number")
             verification_type = get_verification_type(phone_number)
             send_verification_code(phone_number, verification_type)

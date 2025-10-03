@@ -25,7 +25,6 @@ def send_verification_code(phone_number, verification_type):
         if user and not verification_code.user:
             verification_code.user = user
         verification_code.save()
-    text = f"Safe-stations.uz tasdiqlash kod: {code}"  # noqa
     msg_from = "4546"
     payload = {
         "mobile_phone": phone_number.lstrip("+"),
@@ -33,6 +32,7 @@ def send_verification_code(phone_number, verification_type):
         "from": msg_from,
     }
     headers = {"Authorization": f"Bearer {get_sms_service_token()}"}
+    print("code: ", code)
     try:
         response = requests.post(url=url, headers=headers, data=payload)
     except Exception as err:

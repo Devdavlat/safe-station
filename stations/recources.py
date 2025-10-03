@@ -34,6 +34,8 @@ class DailyReportResource(resources.ModelResource):
             "cash",
             "gas_price",
             "employee",
+            "xumo",
+            "uzcard",
         ]
         widgets = {
             'date_of_daily_report': {'format': '%d.%m.%Y'},

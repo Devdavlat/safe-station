@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import environ
 from datetime import timedelta
+from django.utils import timezone
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -143,3 +144,5 @@ REST_AUTH = {"USE_JWT": True}
 SMS_SERVICE_EMAIL = env('SMS_SERVICE_EMAIL')
 SMS_SERVICE_PASSWORD = env('SMS_SERVICE_PASSWORD')
 SMS_SERVICE_BASE_URL = "http://localhost:8000"
+VERIFICATION_CODE_LIFETIME = 1
+BOT_TOKEN = env('BOT_TOKEN')
