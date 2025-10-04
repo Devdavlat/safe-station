@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 import environ
+import django
 from datetime import timedelta
 from django.utils import timezone
 from pathlib import Path

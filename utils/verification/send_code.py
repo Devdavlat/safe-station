@@ -26,6 +26,7 @@ def send_verification_code(phone_number, verification_type):
             verification_code.user = user
         verification_code.save()
     msg_from = "4546"
+    text = f"SafeSystem.uz saytiga ro‘yxatdan o‘tish uchun tasdiqlash kodi: {code} "
     payload = {
         "mobile_phone": phone_number.lstrip("+"),
         "message": text,
@@ -33,8 +34,11 @@ def send_verification_code(phone_number, verification_type):
     }
     headers = {"Authorization": f"Bearer {get_sms_service_token()}"}
     print("code: ", code)
+    print("payload: ", payload)
+
     try:
         response = requests.post(url=url, headers=headers, data=payload)
+        print(response.json())
     except Exception as err:
         logging.error(err)
     else:

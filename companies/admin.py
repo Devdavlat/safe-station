@@ -27,6 +27,7 @@ class AdminDriverGasUsage(admin.ModelAdmin):
         "gas_quantity",
         "date",
         "driver",
+        "station",
         "created_at",
         "updated_at",
     )

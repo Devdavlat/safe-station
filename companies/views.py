@@ -45,8 +45,10 @@ class DailyReportAllCompanyCreateAPIView(APIView):
 
     @swagger_auto_schema(request_body=DailyReportOfAllCompanyCreateSerializer)
     def post(self, request, *args, **kwargs):
+        print("started ")
         data = request.data
         data['user'] = self.request.user.pk
+        print("data : ", data)
         serializer = DailyReportOfAllCompanyCreateSerializer(data=request.data, context={"request": request})
         if serializer.is_valid():
             serializer.save()
