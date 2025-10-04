@@ -4,6 +4,7 @@ from django.dispatch import receiver
 
 from .models import DailReportOfAllCompany, DriveGasUsage
 from users.models import Employee
+from stations.models import Station
 
 
 @receiver(post_save, sender=DailReportOfAllCompany)
@@ -15,10 +16,15 @@ def save_employee_and_sum_of_gas_quantity(sender, instance, **kwargs):  # noqa
             break
     else:
         request = None
-    employee = Employee.objects.filter(user=request.user)
-    gas_quantity = DriveGasUsage.objects.filter(date=instance.date, station=employee.values('station')).aggregate(
-        models.Sum("gas_quantity"))[
-        "gas_quantity__sum"
-    ]
-    DailReportOfAllCompany.objects.filter(pk=instance.pk).update(gas_quantity=gas_quantity,
-                                                                 employee=employee.values('pk'))
+    print("Station:", Station.objects.filter(user=request.user))
+    employee = Employee.objects.filter(user=request.user).first()
+    print("employee.station:", employee.station)
+    gas_quantity = DriveGasUsage.objects.filter(
+        date=instance.date,
+        station=employee.station
+    ).aggregate(models.Sum("gas_quantity"))["gas_quantity__sum"]
+
+    DailReportOfAllCompany.objects.filter(pk=instance.pk).update(
+        gas_quantity=gas_quantity,
+        employee=employee.pk if employee else None
+    )

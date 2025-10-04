@@ -1,4 +1,4 @@
-#!/home/davlat/py_projects/safe_project/safe-station/vevn/bin/python3
+#!/home/davlat/py_projects/safe_project/safe-station/vevn/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
